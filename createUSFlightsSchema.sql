@@ -72,27 +72,27 @@ LAX, 2000, 03, 2
 */
 select origin, colYear, colMonth, avg(arrDelay) as 'Arrival delay avarage'
 from flights 
-group by colMonth;
+group by origin, colYear, colMonth;
 
 /*Exercise 4*/
 /*Retard promig d’arribada dels vols, per mesos i segons l’aeroport origen (mateixa consulta que abans i amb el mateix ordre). 
 Però a més, ara volen que en comptes del codi de l’aeroport es mostri el nom de la ciutat.
 		Los Angeles, 2000, 01, retard
 Los Angeles, 2000, 02, retard*/
-select a.Airport, f.colYear, f.colMonth, avg(arrDelay)  as 'Arrival delay avarage' 
+select a.Airport, f.colYear, f.colMonth,  avg(arrDelay)  as 'Arrival delay avarage' 
 from flights f
 left join USAirports a
 on f.origin=a.IATA
-group by f.colMonth;
+group by f.origin, f.colYear, f.colMonth;
 
 /*Exercise 5*/
 /*Les companyies amb més vols cancelats. 
 A més, han d’estar ordenades de forma que les companyies amb més cancel·lacions apareguin les primeres.*/
 /*select UniqueCarrier from flights;*/
-select sum(cancelled) as 'Cancelled', UniqueCarrier as 'AirLine' 
+select UniqueCarrier as 'AirLine' , count(cancelled) as 'Cancelled'
 from flights
 group by UniqueCarrier
-order by sum(cancelled) desc;
+order by count(cancelled) desc;
 
 /*Exercise 6*/
 /*L’identificador dels 10 avions que més distància han recorregut fent vols.*/
