@@ -109,3 +109,5 @@ select UniqueCarrier 'AirLine', avg(ArrDelay) 'Arrival delay'
 from flights
 group by UniqueCarrier
 having avg(arrDelay)>10;
+
+/*Oliver Abad*/
